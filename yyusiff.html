@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Nexify | Modern Hub with Smart Ads</title>
+  <!-- Google Fonts & simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f6f9fc;
+      color: #1a2c3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / navigation */
+    .site-header {
+      background: white;
+      backdrop-filter: blur(0px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e9edf2;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 18px 0;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0f2b3d, #1b4f6e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      background: none;
+      color: #ff7a2f;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c4b66;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #ff7a2f;
+    }
+
+    .btn-cta {
+      background: #ff7a2f;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(255, 122, 47, 0.2);
+    }
+
+    .btn-cta:hover {
+      background: #e5641a;
+      transform: scale(0.97);
+    }
+
+    /* hero section */
+    .hero {
+      padding: 70px 0 60px;
+      text-align: center;
+      background: linear-gradient(145deg, #ffffff 0%, #f5faff 100%);
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0f2b3d, #22668d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #4a627a;
+      max-width: 620px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #1b4f6e;
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-primary:hover {
+      background: #0f3b54;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #cbdde9;
+      color: #1b4f6e;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      border-color: #ff7a2f;
+      color: #ff7a2f;
+    }
+
+    /* Ad banners (link ads) */
+    .ad-section {
+      margin: 48px 0 20px;
+    }
+
+    .ad-container {
+      background: white;
+      border-radius: 28px;
+      padding: 24px 28px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eef3f8;
+      transition: 0.2s;
+    }
+
+    .inline-ad {
+      background: linear-gradient(115deg, #fef7e8, #fff3e0);
+      border-left: 5px solid #ff7a2f;
+      border-radius: 20px;
+    }
+
+    .ad-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #ffede3;
+      color: #ff7a2f;
+      padding: 4px 12px;
+      border-radius: 40px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .ad-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a2c3e;
+    }
+
+    .ad-description {
+      color: #4a5e72;
+      margin-bottom: 20px;
+    }
+
+    .ad-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ff7a2f;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .ad-link:hover {
+      background: #e05f1a;
+      gap: 12px;
+    }
+
+    /* Two column layout for featured + sidebar ads */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+      margin: 40px 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      transition: all 0.2s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+      border: 1px solid #eef2f8;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+      border-color: #dce5ed;
+    }
+
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .content-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .content-card p {
+      color: #5b6f82;
+      margin-bottom: 18px;
+    }
+
+    .card-link {
+      font-weight: 600;
+      text-decoration: none;
+      color: #ff7a2f;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* sidebar ads area */
+    .sidebar-ads {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sponsor-card {
+      background: linear-gradient(135deg, #ffffff, #fafdff);
+      border-radius: 24px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #eef2fa;
+      transition: 0.2s;
+    }
+
+    .sponsor-logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .sponsor-text {
+      font-size: 0.9rem;
+      margin: 12px 0;
+    }
+
+    .sponsor-btn {
+      display: inline-block;
+      background: #eef2fa;
+      padding: 8px 16px;
+      border-radius: 32px;
+      text-decoration: none;
+      font-weight: 500;
+      color: #1b4f6e;
+    }
+
+    /* banner ads bottom */
+    .bottom-banner {
+      background: #0f212e;
+      border-radius: 32px;
+      margin: 40px 0 60px;
+      padding: 32px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .bottom-banner h3 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .bottom-banner p {
+      color: #cbdae6;
+      max-width: 400px;
+    }
+
+    .banner-link {
+      background: #ff7a2f;
+      padding: 12px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+    }
+
+    footer {
+      background: #0c1a24;
+      color: #adb7c2;
+      padding: 48px 0 24px;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid #1e3342;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 800px) {
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">Nex<span>ify</span>.</div>
+    <div class="nav-links">
+      <a href="#">Discover</a>
+      <a href="#">Insights</a>
+      <a href="#">Creators</a>
+      <a href="#" class="btn-cta">Join Hub</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Smart connections, <br>premium link ads</h1>
+      <p>Explore curated content, sponsored offers, and high-performance ad integrations — built for modern users and brands.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Explore now →</a>
+        <a href="#" class="btn-outline">Partner with us</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Featured inline ad (link ad) - prominent placement -->
+    <div class="ad-section">
+      <div class="ad-container inline-ad">
+        <div class="ad-badge">🌟 Sponsored link</div>
+        <div class="ad-title">Design your future with Masterclass UI</div>
+        <p class="ad-description">Get 40% off on the ultimate design & dev toolkit. Limited slots — click below to claim.</p>
+        <a href="#" class="ad-link" target="_blank">Claim deal →</a>
+      </div>
+    </div>
+
+    <!-- main 2 column area: cards + sidebar link ads -->
+    <div class="featured-grid">
+      <!-- left side: best website content -->
+      <div>
+        <h2 style="margin-bottom: 24px; font-size: 1.8rem;">✨ The best of the web</h2>
+        <div class="card-grid">
+          <div class="content-card">
+            <div class="card-icon">🚀</div>
+            <h3>Velocity Studio</h3>
+            <p>Lightning-fast websites with modern architecture. Used by top creators.</p>
+            <a href="#" class="card-link">Learn more →</a>
+          </div>
+          <div class="content-card">
+            <div class="card-icon">🎨</div>
+            <h3>Chromax Design</h3>
+            <p>AI-powered design recommendations & asset library for brands.</p>
+            <a href="#" class="card-link">Explore →</a>
+          </div>
+          <div class="content-card">
+            <div class="card-icon">📊</div>
+            <h3>DataPulse Analytics</h3>
+            <p>Understand your audience in real-time. Free trial available.</p>
+            <a href="#" class="card-link">Get insights →</a>
+          </div>
+          <div class="content-card">
+            <div class="card-icon">🤖</div>
+            <h3>Nexify AI</h3>
+            <p>Smart automation for content creators and ad optimization.</p>
+            <a href="#" class="card-link">Discover AI →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- right side: Link Ads & sponsorship box (multiple ad links) -->
+      <div class="sidebar-ads">
+        <div class="sponsor-card">
+          <div class="sponsor-logo">⚡ Advertise</div>
+          <div class="ad-badge" style="background:#e9f0f5;">featured link</div>
+          <p class="sponsor-text"><strong>NordVPN</strong> – Secure your digital life. 68% OFF + 3 months extra.</p>
+          <a href="#" class="sponsor-btn" target="_blank">Get NordVPN →</a>
+        </div>
+
+        <div class="sponsor-card">
+          <div class="sponsor-logo">📚 Skill Bloom</div>
+          <div class="ad-badge" style="background:#f0e6ff;">partner link</div>
+          <p class="sponsor-text">Master high-income skills with 14 days premium pass. Join 50k+ learners.</p>
+          <a href="#" class="sponsor-btn" target="_blank">Start learning →</a>
+        </div>
+
+        <div class="sponsor-card inline-ad" style="border-left: 3px solid #ff7a2f;">
+          <div class="ad-badge">🔥 exclusive link ad</div>
+          <p class="sponsor-text"><strong>Hostinger 🔥</strong> – 80% off web hosting + free domain. Best performance 2025.</p>
+          <a href="#" class="sponsor-btn" style="background:#ff7a2f; color:white;">Claim hosting →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional banner ad + link placement ( eye-catching ) -->
+    <div class="bottom-banner">
+      <div>
+        <h3>⚡ Limited deal: Amazon Prime</h3>
+        <p>Exclusive access to Prime Video, Music, and fast delivery. Click the link to activate 30-day free trial.</p>
+      </div>
+      <a href="#" class="banner-link" target="_blank">Try Prime for $0 →</a>
+    </div>
+
+    <!-- Mid section: two high performance link ads (grid style) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 30px 0;">
+      <div class="ad-container" style="text-align: center;">
+        <div class="ad-badge">📌 sponsored</div>
+        <h3 style="font-size: 1.3rem; margin: 10px 0;">✨ Grammarly Premium</h3>
+        <p>Write with confidence. AI assistance everywhere. Up to 40% discount.</p>
+        <a href="#" class="ad-link" style="background: #22668d;">Write better →</a>
+      </div>
+      <div class="ad-container" style="text-align: center;">
+        <div class="ad-badge">💡 link ad</div>
+        <h3 style="font-size: 1.3rem; margin: 10px 0;">🎧 Audible Plus</h3>
+        <p>Thousands of audiobooks, podcasts & originals. First month free.</p>
+        <a href="#" class="ad-link" style="background: #22668d;">Start listening →</a>
+      </div>
+    </div>
+
+    <!-- recommendations / "best picks" section with native ads integration -->
+    <div style="margin: 30px 0 20px;">
+      <h2 style="margin-bottom: 20px;">🏆 Editor's picks: top recommended tools</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+        <div style="flex:1; min-width: 180px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border: 1px solid #eef2f5;">
+          <div>🔗 <strong>Surfshark VPN</strong> — Unlimited devices, secure browsing</div>
+          <a href="#" style="display: inline-block; margin-top: 12px; font-weight: 500; color:#ff7a2f;">Get deal →</a>
+        </div>
+        <div style="flex:1; min-width: 180px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border: 1px solid #eef2f5;">
+          <div>📧 <strong>Proton Mail</strong> — Encrypted email & calendar</div>
+          <a href="#" style="display: inline-block; margin-top: 12px; font-weight: 500; color:#ff7a2f;">Upgrade free →</a>
+        </div>
+        <div style="flex:1; min-width: 180px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 6px 14px rgba(0,0,0,0.02); border: 1px solid #eef2f5;">
+          <div>📈 <strong>SEMrush</strong> — #1 SEO tool for growth</div>
+          <a href="#" style="display: inline-block; margin-top: 12px; font-weight: 500; color:#ff7a2f;">Try 7 days →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final call to action with link ad embedded -->
+    <div style="background: #ffece2; border-radius: 36px; margin: 48px 0; padding: 40px 32px; text-align: center;">
+      <div class="ad-badge" style="background:#ffd6c4;">partner spotlight</div>
+      <h2 style="font-size: 2rem; margin: 16px 0;">Ready to scale your brand?</h2>
+      <p style="max-width: 500px; margin: 0 auto 24px;">Join our ad network & reach millions of engaged users. Premium link placement guaranteed.</p>
+      <a href="#" class="btn-primary" style="background:#ff7a2f; box-shadow: none;">Become a sponsor →</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color: white; background: none; -webkit-background-clip: unset;">Nex<span>ify</span>.</div>
+        <p style="margin-top: 12px; max-width: 240px;">The smartest way to discover trending content and premium ad experiences.</p>
+      </div>
+      <div>
+        <h4 style="color: white;">Resources</h4>
+        <ul style="list-style: none; margin-top: 12px;">
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Advertise</a></li>
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Publishers</a></li>
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: white;">Link partners</h4>
+        <ul style="list-style: none; margin-top: 12px;">
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Advertise with us</a></li>
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Become affiliate</a></li>
+          <li><a href="#" style="color:#a2bbd0; text-decoration: none;">Media kit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      © 2025 Nexify — The best website experience with integrated link ads. All trademarks belong to their respective owners.
+    </div>
+  </div>
+</footer>
+
+<!-- (Optional note: all links are placeholder "#" but represent functional ad/link placements;
+     In production they'd redirect to actual sponsor offers or affiliate networks) -->
+</body>
+</html>
